@@ -69,3 +69,40 @@ No additional evidence of malicious activity was identified.
 #### Conclusion
 
 The alert was classified as a **false positive / benign activity** after investigation. This case demonstrated the importance of validating high-severity alerts using process information, command-line analysis, timeline correlation, and environmental context rather than relying on alert severity alone.
+
+### Case 2 – Simulated Suspicious PowerShell Activity
+
+**Activity:** PowerShell execution with Execution Policy bypass  
+**Wazuh Rule:** 92027 – PowerShell process spawned PowerShell instance  
+**Wazuh Severity:** Level 4  
+**MITRE ATT&CK:** T1059.001 – PowerShell  
+**Endpoint:** SOC-WIN  
+**Classification:** Authorized Security Simulation
+
+#### Simulation
+
+A controlled PowerShell command was executed on the SOC-WIN endpoint to simulate suspicious PowerShell behavior in a safe lab environment.
+
+The command launched a child PowerShell process using `-NoProfile` and `-ExecutionPolicy Bypass`, then created a harmless test file in the user's temporary directory.
+
+#### Detection and Investigation
+
+Sysmon captured the activity as **Event ID 1 (Process Creation)**, and Wazuh generated Rule `92027`.
+
+Analysis of the event identified:
+
+- `powershell.exe` as both the parent and child process.
+- Execution under the `SOC-WIN\Soc-analyst` account.
+- Use of `-NoProfile` and `-ExecutionPolicy Bypass`.
+- Creation of `soc-suspicious-test.txt` in the user's Temp directory.
+- MITRE ATT&CK mapping to **T1059.001 – PowerShell**.
+
+The command line recorded by Sysmon provided visibility into the exact activity performed.
+
+During timeline analysis, additional Sysmon Event ID 11 alerts were observed for temporary `__PSScriptPolicyTest_*.ps1` files created by PowerShell. Wazuh assigned these events a high severity level; however, reviewing the filenames, creating process, user context, and surrounding activity showed that they occurred as part of the controlled PowerShell activity rather than an actual malware transfer.
+
+#### Conclusion
+
+The activity was classified as an **authorized security simulation**. The test demonstrated that Sysmon and Wazuh could detect and provide useful telemetry for suspicious PowerShell execution.
+
+This investigation also demonstrated why alert severity and MITRE ATT&CK mappings should be validated against raw event data and environmental context before determining whether an incident is malicious.
