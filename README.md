@@ -62,6 +62,10 @@ During timeline analysis, a nearby `net user` event was identified. Although thi
 
 No additional evidence of malicious activity was identified.
 
+![Surrounding Events Investigation](surrounding-events-investigation.png)
+
+*Figure 2: Surrounding events reviewed to correlate activity around the Level 12 alert.*
+
 #### Conclusion
 
 The alert was classified as a **false positive / benign activity** after investigation. This case demonstrated the importance of validating high-severity alerts using process information, command-line analysis, timeline correlation, and environmental context rather than relying on alert severity alone.
