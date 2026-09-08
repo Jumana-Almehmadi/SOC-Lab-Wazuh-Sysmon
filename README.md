@@ -37,6 +37,9 @@ The lab uses Wazuh as the SIEM/XDR platform and Sysmon to provide detailed Windo
 **Endpoint:** SOC-WIN  
 **Final Classification:** False Positive / Benign Activity
 
+![Wazuh Level 12 Alert](alert-level12-detection.png)
+*Figure 1: Wazuh Level 12 suspicious process alert detected on the SOC-WIN endpoint.*
+
 #### Investigation
 
 Wazuh generated a Level 12 alert for `backgroundTaskHost.exe`. Due to the high severity, the alert was investigated before determining whether the activity was malicious.
