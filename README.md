@@ -8,6 +8,8 @@ The lab uses Wazuh as the SIEM/XDR platform and Sysmon to provide detailed Windo
 
 ## Lab Architecture
 
+![SOC Lab Architecture](soc-lab-architecture.png)
+
 - Windows 11 – Monitored endpoint
 - Sysmon – Endpoint telemetry and process monitoring
 - Wazuh Agent – Log forwarding
