@@ -101,6 +101,10 @@ The command line recorded by Sysmon provided visibility into the exact activity 
 
 During timeline analysis, additional Sysmon Event ID 11 alerts were observed for temporary `__PSScriptPolicyTest_*.ps1` files created by PowerShell. Wazuh assigned these events a high severity level; however, reviewing the filenames, creating process, user context, and surrounding activity showed that they occurred as part of the controlled PowerShell activity rather than an actual malware transfer.
 
+![PowerShell Simulation Investigation](powershell-simulation-investigation.png)
+
+*Figure 3: Sysmon telemetry showing the simulated PowerShell activity, including ExecutionPolicy Bypass, process lineage, and user context.*
+
 #### Conclusion
 
 The activity was classified as an **authorized security simulation**. The test demonstrated that Sysmon and Wazuh could detect and provide useful telemetry for suspicious PowerShell execution.
